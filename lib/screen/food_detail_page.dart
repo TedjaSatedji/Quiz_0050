@@ -1,9 +1,6 @@
-
-
 import 'package:flutter/material.dart';
 
 import '../models/food.dart';
-
 
 class FoodDetailPage extends StatefulWidget {
   final Food food;
@@ -15,21 +12,7 @@ class FoodDetailPage extends StatefulWidget {
 }
 
 class _FoodDetailPageState extends State<FoodDetailPage> {
-
   final TextEditingController _qtyController = TextEditingController(text: '1');
-
-
-  void _handleCheckout() {
-    final int qty = int.tryParse(_qtyController.text.trim()) ?? 0;
-
-    if (qty <= 0) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Masukkan jumlah yang valid!')),
-      );
-      return; // Keluar dari method, tidak lanjut eksekusi
-    }
-
-  }
 
   @override
   void dispose() {
@@ -42,7 +25,6 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -55,19 +37,15 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
         ),
         iconTheme: const IconThemeData(color: Colors.black87),
       ),
-
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start, // Rata kiri
           children: [
             Image.network(
               widget.food.image,
-
               width: double.infinity,
               height: 220,
-
               fit: BoxFit.cover,
-
               loadingBuilder: (context, child, loadingProgress) {
                 if (loadingProgress == null) return child; // Loading selesai
                 return Container(
@@ -76,18 +54,17 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   child: const Center(child: CircularProgressIndicator()),
                 );
               },
-
               errorBuilder: (context, error, stackTrace) {
                 return Container(
                   height: 220,
                   color: Colors.grey.shade300,
                   child: const Center(
-                    child: Icon(Icons.broken_image, size: 60, color: Colors.grey),
+                    child:
+                        Icon(Icons.broken_image, size: 60, color: Colors.grey),
                   ),
                 );
               },
             ),
-
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -107,14 +84,14 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                           ),
                         ),
                       ),
-
                       Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.orange.shade100, // Background oranye muda
+                          color:
+                              Colors.orange.shade100, // Background oranye muda
                           borderRadius: BorderRadius.circular(20), // Pill shape
                         ),
                         child: Text(
@@ -140,9 +117,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                           color: Colors.orange,
                         ),
                       ),
-
                       const Spacer(),
-
                     ],
                   ),
                   const SizedBox(height: 16),
@@ -159,13 +134,13 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
 
                   RichText(
                     text: TextSpan(
-                      style: const TextStyle(fontSize: 14, color: Colors.black87),
+                      style:
+                          const TextStyle(fontSize: 14, color: Colors.black87),
                       children: [
                         const TextSpan(
                           text: 'Komposisi  ',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-
                         TextSpan(text: widget.food.ingredients.join(', ')),
                       ],
                     ),
@@ -176,20 +151,27 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   const SizedBox(height: 12),
 
                   Row(
-                    children: [
-                      
-                      
-                    ],
+                    children: [],
                   ),
                   const SizedBox(height: 12),
 
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: _handleCheckout,
-
+                      onPressed: () {
+                        final snackdemo = SnackBar(
+                          content:
+                              Text('Berhasil membeli ${widget.food.name}'),
+                          backgroundColor: Colors.green,
+                          elevation: 10,
+                          behavior: SnackBarBehavior.floating,
+                          margin: EdgeInsets.all(5),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackdemo);
+                      },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange, // Warna background tombol
+                        backgroundColor:
+                            Colors.orange, // Warna background tombol
                         foregroundColor: Colors.white, // Warna teks
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(
@@ -197,7 +179,6 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                         ),
                         elevation: 0, // Tanpa bayangan
                       ),
-
                       child: const Text(
                         'Checkout',
                         style: TextStyle(fontSize: 16),
@@ -214,4 +195,3 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     );
   }
 }
-
