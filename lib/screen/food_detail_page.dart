@@ -166,7 +166,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                           elevation: 10,
                           behavior: SnackBarBehavior.floating,
                           margin: EdgeInsets.all(5),
-                        );
+                        ); 
                         ScaffoldMessenger.of(context).showSnackBar(snackdemo);
                       }, 
                       style: ElevatedButton.styleFrom(
