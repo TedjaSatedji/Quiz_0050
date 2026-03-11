@@ -158,7 +158,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: ()  {
                         final snackdemo = SnackBar(
                           content:
                               Text('Berhasil membeli ${widget.food.name}'),
@@ -168,7 +168,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                           margin: EdgeInsets.all(5),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackdemo);
-                      },
+                      }, 
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
                             Colors.orange, // Warna background tombol
